@@ -1,11 +1,10 @@
 // route.ts
-import { NextApiRequest, NextApiResponse } from 'next';
-import { Request, Response } from 'express';
+//import { Request, Response } from 'express';
 import Contador from '@/app/models/Contador';
 import { connectDB } from '@/app/libs/gamebd';
 import { NextResponse } from 'next/server';
 
-export async function GET(request: NextApiRequest, response: NextApiResponse) {
+export async function GET() {
   try {
     await connectDB(); 
     let contador = await Contador.findOne();
@@ -21,7 +20,7 @@ export async function GET(request: NextApiRequest, response: NextApiResponse) {
   }
 }
 
-export async function POST(request: NextApiRequest, response: NextApiResponse) {
+export async function POST() {
   try {
     await connectDB();
     let contador = await Contador.findOne();
