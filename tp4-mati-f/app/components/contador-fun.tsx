@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Contador: React.FC = () => {
-  const [contador, setContador] = useState<number>(0);
+  const [contador, setContador] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchCounter = async () => {
@@ -14,7 +14,7 @@ const Contador: React.FC = () => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setContador(data.count);
+        setContador(data.valor);
       } catch (error) {
         console.error('Error fetching counter:', error);
       }
@@ -36,7 +36,7 @@ const Contador: React.FC = () => {
       console.error('Error incrementing counter:', error);
     }
   };
-
+  
   return (
     <div className="text-center">
       <h2 className="text-2xl mb-4">Contador: {contador}</h2>

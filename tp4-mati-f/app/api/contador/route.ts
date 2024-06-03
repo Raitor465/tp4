@@ -10,10 +10,10 @@ export async function GET(request: Request, response: Response) {
     let contador = await Contador.findOne();
     console.log(contador)
     if (!contador) {
-      contador = new Contador({ value: 2 });
+      contador = new Contador({ value: 0 });
       await contador.save();
     }
-    return NextResponse.json({ valor: contador.valor });
+    return NextResponse.json({ valor: contador.value });
   } catch (error) {
     console.error('Error obteniendo el contador:', error);
     return NextResponse.json({ message: 'Error en el servidor' }, { status: 500 });
@@ -34,9 +34,9 @@ export async function POST(request: Request, response: Response) {
     }
     contador.value = newValue;
     await contador.save();
-    return response.json({ count: contador.value });
+    return NextResponse.json({ count: contador.value });
   } catch (err) {
     console.error('Error incrementando el contador:', err);
-    return response.status(500).json({ message: 'Error incrementando el contador' });
+    return NextResponse.json({ message: 'Error incrementando el contador' });
   }
 }
